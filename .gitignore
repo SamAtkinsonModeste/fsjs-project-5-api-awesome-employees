@@ -9,6 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+
+
 *.env
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -427,3 +429,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+# My list
+.vscode/
+old-files/
