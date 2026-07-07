@@ -12,12 +12,18 @@ html,
 body {
     width: 100%;
     max-width: 100%;
+
 }
 
 body {
     font-family: "Nunito", sans-serif;
     text-align: center;
     background: rgba(235, 235, 235, 0.9);
+    background: url(../images/body-bg.webp) no-repeat 20% top fixed;
+    background-size: cover;
+    /* background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; */
 }
 
 header {
@@ -66,25 +72,36 @@ header h1 {
 }
 
 
+
+/* ======================================
+Main
+======================================== */
+
+.main {
+    width: 95%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: solid rgb(243, 210, 108) 1px;
+
+}
+
+
 /* =====================================
    Gallery
 ======================================== */
 
 .gallery {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1rem;
+    /* border: solid rgb(255, 171, 52) 1px; */
 }
 
 .card-container {
-    border: solid red 1px;
-    width: 100%;
-    max-width: 360px;
-    margin: 10px 10px 20px;
+    /* border: solid rgb(255, 52, 52) 1px; */
+    margin: 8px 0;
 }
 
 
@@ -94,18 +111,41 @@ header h1 {
     flex-wrap: nowrap;
     justify-content: flex-start;
     cursor: pointer;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.9);
+    background: rgba(245, 245, 245, 0.2);
+    background: rgb(6, 5, 10);
     border-radius: 0.25em;
-    border: 1px solid rgba(50, 50, 50, 0.3);
+    border: solid rgb(120, 114, 79) 1px;
     transition: .4s ease-out;
     overflow: hidden;
 
 }
 
+.card-img-container {
+    background: rgb(243, 210, 108);
+    background: linear-gradient(141deg,
+            #c9933b 0%,
+            #ffd700 15%,
+            #b07e2a 50%,
+            #ffd700 85%,
+            #c9933b 100%);
+    background: linear-gradient(49deg,
+            #241701 0%,
+            #c9933b 40%,
+            #ffd700 100%);
+    border-radius: 50%;
+    padding: 5px;
+    margin-right: 10px;
+    box-shadow: 0 1px 3px #f9ee8d;
+}
+
 .card-img {
     width: 95px;
-    margin: 10px 15px auto 10px;
+    display: block;
+    margin: 0 auto;
     border-radius: 50%;
 }
 
@@ -115,11 +155,13 @@ header h1 {
 
 .card-name {
     margin: 20px auto 0;
+    color: rgb(186, 162, 137);
 }
 
 .card-text {
     font-size: 0.9em;
     color: rgba(50, 50, 50, 0.7);
+    color: rgb(186, 162, 137);
     margin: 7px auto;
     transition: .4s ease-out;
 }
