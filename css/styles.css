@@ -3,6 +3,7 @@
 ======================================== */
 
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@500&family=Bad+Script&family=Raleway+Dots&family=Raleway:wght@700&display=swap");
 
 * {
     box-sizing: border-box;
@@ -16,18 +17,20 @@ body {
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+    /* font-family: "Nunito", sans-serif; */
+    font-family: "Raleway", sans-serif;
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background: linear-gradient(49deg, #050505 0%, #161616 30%, #1b1b1b 65%, #050505 100%);
     background: url(../images/body-bg.webp) no-repeat 20% top fixed;
     background-size: cover;
-    /* background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; */
 }
 
 header {
     padding: 15px 5px 5px;
+    background: linear-gradient(49deg, #050505 0%, #161616 30%, #1b1b1b 65%, #050505 100%);
+    box-shadow: 0 1px 1px #ff7814;
+    ;
+
 }
 
 .header-inner-container {
@@ -41,18 +44,100 @@ header h1 {
     margin-top: 35px;
 }
 
-.search-input {
-    padding: 0.4rem 1rem;
-    border: 1px solid rgba(200, 200, 200, 0.9);
-    border-radius: 0.25rem 0 0 0.25rem;
-    max-width: 20rem;
-    transition: .4s ease-out;
+.awesome {
+    font-family: 'Bad Script', cursive;
+    letter-spacing: 2px;
+
 }
 
-.search-input:active,
-.search-input:hover,
-.search-input:focus {
-    border: 1px solid rgba(50, 50, 50, 0.9);
+.heading,
+h2 {
+    font-family: 'Raleway Dots', cursive;
+}
+
+.heading,
+.awesome {
+    font-size: 0.829em;
+    letter-spacing: 0.09em;
+    line-height: 2em;
+    text-align: center;
+    color: #ffd700;
+}
+
+/*=========================
+SEARCH INPUT ELEMENTS
+===============================*/
+
+
+.search-container {
+    position: relative;
+}
+
+#search-input {
+    position: relative;
+    top: 0;
+    width: 75%;
+    background: #040000;
+    border-radius: 3px;
+    padding: 1em;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: auto;
+    border-bottom: 1px solid #ff7814;
+    transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#search-close {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 12px;
+    right: -36px;
+    border-radius: 100%;
+    background: #040200;
+    border-width: 1px;
+    border-color: #ff7814;
+    font-size: 1.5em;
+    color: #b07e2a;
+    box-shadow: 0 0 15px var(--primary-black-color) inset;
+    text-shadow: 1px 1px 1px #ffd700;
+    transition: .5s ease-out;
+    cursor: pointer;
+
+}
+
+label {
+    display: block;
+    width: 147px;
+    cursor: pointer;
+    margin-left: 31px;
+    color: #ffd700;
+    transform: translateY(-34px);
+    transition: transform .2s ease-in-out;
+}
+
+#search-close:hover {
+    transform: scale(1.1);
+}
+
+#search-input:active,
+#search-input:hover,
+#search-input:focus {
+    width: 100%;
+    background: #ffd700;
+    color: var(--primary-black-color);
+    box-shadow: 0 0 15px var(--primary-black-color) inset;
+    caret-color: #040200;
+    border-bottom: 3px solid #a54f0c;
+
+}
+
+#search-input:active~label,
+#search-input:hover~label,
+#search-input:focus~label {
+    transform: translateY(-82px);
+
 }
 
 .search-submit {
@@ -82,7 +167,7 @@ Main
     max-width: 1400px;
     margin: 2rem auto;
     padding: 1rem;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(1, 0, 0, 0.6);
     border: solid rgb(243, 210, 108) 1px;
 
 }
@@ -115,7 +200,6 @@ Main
     max-width: 360px;
     margin: 0 auto;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.2);
     background: rgb(6, 5, 10);
     border-radius: 0.25em;
     border: solid rgb(120, 114, 79) 1px;
@@ -140,6 +224,7 @@ Main
     padding: 5px;
     margin-right: 10px;
     box-shadow: 0 1px 3px #f9ee8d;
+    transition: transform .4s ease-out;
 }
 
 .card-img {
@@ -155,13 +240,14 @@ Main
 
 .card-name {
     margin: 20px auto 0;
-    color: rgb(186, 162, 137);
+    color: #ffd700;
+    /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
 }
 
 .card-text {
     font-size: 0.9em;
     color: rgba(50, 50, 50, 0.7);
-    color: rgb(186, 162, 137);
+    color: rgb(249, 204, 145);
     margin: 7px auto;
     transition: .4s ease-out;
 }
@@ -280,31 +366,63 @@ Main
         text-align: left;
     }
 
+    .heading,
+    .awesome {
+
+        text-shadow: 1px 1px 1px #3f3c22;
+    }
+
+
+    .awesome {
+        font-size: 1.4rem;
+    }
+
     .search-container {
         margin-top: 25px;
     }
 
+    .card:hover {
+        background: #f7f3d9;
+        box-shadow: inset 0px 0px 4px rgba(6, 5, 10);
+        border-color: rgba(6, 5, 10);
+    }
+
+    .card:hover .card-name {
+        color: #241701;
+        text-shadow: 0 1px 1px rgb(247, 141, 41);
+    }
+
+    .card:hover .card-text {
+        color: rgb(1, 0, 0);
+    }
+
+    .card:hover .card-img-container {
+        background: linear-gradient(49deg,
+                #1d1200 0%,
+                #5f3910 35%,
+                #8e5a18 70%,
+                #c9933b 100%);
+        box-shadow: 0 1px 3px rgba(6, 5, 1);
+        transform: translateX(-9px);
+    }
+
+
     .modal {
         margin-top: 100px;
     }
+
 }
 
 
 /* =====================================
    Desktop
-   Hover styles on desktop
 ======================================== */
 
 @media (min-width: 1024px) {
-
-    .card:hover {
-        background: rgba(255, 255, 255, 1);
-        border: 1px solid rgba(50, 50, 50, 0.9);
+    .awesome {
+        font-size: 1.6rem;
     }
 
-    .card:hover .card-text {
-        color: rgba(25, 25, 25, 1);
-    }
 
     .btn:hover {
         background: rgba(255, 255, 255, 1);
