@@ -209,13 +209,9 @@ Main
 }
 
 .card-img-container {
+    width: 105px;
+    height: 105px;
     background: rgb(243, 210, 108);
-    background: linear-gradient(141deg,
-            #c9933b 0%,
-            #ffd700 15%,
-            #b07e2a 50%,
-            #ffd700 85%,
-            #c9933b 100%);
     background: linear-gradient(49deg,
             #241701 0%,
             #c9933b 40%,
