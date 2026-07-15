@@ -1,9 +1,80 @@
 /* =====================================
    Public API Request
 ======================================== */
-
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 @import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@500&family=Bad+Script&family=Raleway+Dots&family=Raleway:wght@700&display=swap");
+/* ======================================
+   Custom Colour Variables
+======================================== */
+
+:root {
+
+    /* ======================================
+       Solid Colours
+    ====================================== */
+
+    --primary-black-color: #050505;
+    --deep-black-color: #040000;
+    --deep-brown-black-color: #040200;
+
+    --dark-grey-color: #161616;
+    --charcoal-grey-color: #1b1b1b;
+
+    --dark-card-bg: rgb(6, 5, 10);
+
+    --bright-gold-color: #ffd700;
+    --warm-gold-color: #c9933b;
+    --muted-gold-color: #b07e2a;
+    --orange-gold-color: #ff7814;
+    --burnt-orange-color: #a54f0c;
+
+    --deep-brown-color: #1d1200;
+    --dark-brown-color: #241701;
+    --medium-brown-color: #5f3910;
+    --light-brown-color: #8e5a18;
+
+    --light-gold-color: rgb(243, 210, 108);
+    --card-border-color: rgb(120, 114, 79);
+    --card-text-color: rgb(249, 204, 145);
+
+    --card-hover-bg: #f7f3d9;
+    --card-hover-text-color: rgb(1, 0, 0);
+
+    --heading-shadow-color: #3f3c22;
+    --pale-gold-shadow-color: #f9ee8d;
+    --orange-highlight-color: rgb(247, 141, 41);
+
+    --image-dark-shadow-color: rgb(6, 5, 1);
+
+    /* ======================================
+       Transparent Colours
+    ====================================== */
+
+    --main-transparent-bg: rgba(1, 0, 0, 0.6);
+
+    --datalist-transparent-bg: rgba(4, 2, 0, 0.5);
+    --option-transparent-bg: rgba(4, 2, 0, 0.6);
+
+    /* ======================================
+       Custom Gradients
+    ====================================== */
+
+    --header-bg-gradient: linear-gradient(49deg,
+            #050505 0%,
+            #161616 30%,
+            #1b1b1b 65%,
+            #050505 100%);
+
+    --card-image-gradient: linear-gradient(49deg,
+            #241701 0%,
+            #c9933b 40%,
+            #ffd700 100%);
+
+    --card-image-hover-gradient: linear-gradient(49deg,
+            #1d1200 0%,
+            #5f3910 35%,
+            #8e5a18 70%,
+            #c9933b 100%);
+}
 
 * {
     box-sizing: border-box;
@@ -19,18 +90,17 @@ body {
 }
 
 body {
-    /* font-family: "Nunito", sans-serif; */
     font-family: "Raleway", sans-serif;
     text-align: center;
-    background: linear-gradient(49deg, #050505 0%, #161616 30%, #1b1b1b 65%, #050505 100%);
+    background: var(--header-bg-gradient);
     background: url(../images/body-bg.webp) no-repeat 20% top fixed;
     background-size: cover;
 }
 
 header {
     padding: 15px 5px 5px;
-    background: linear-gradient(49deg, #050505 0%, #161616 30%, #1b1b1b 65%, #050505 100%);
-    box-shadow: 0 1px 1px #ff7814;
+    background: var(--header-bg-gradient);
+    box-shadow: 0 1px 1px var(--orange-gold-color);
     ;
 
 }
@@ -42,7 +112,6 @@ header {
 
 header h1 {
     font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
     margin-top: 35px;
 }
 
@@ -63,7 +132,7 @@ h2 {
     letter-spacing: 0.09em;
     line-height: 2em;
     text-align: center;
-    color: #ffd700;
+    color: var(--bright-gold-color);
 }
 
 /*=========================
@@ -84,14 +153,14 @@ SEARCH INPUT ELEMENTS
     top: 14px;
     right: 25px;
     width: 75%;
-    background: #040000;
+    background: var(--deep-black-color);
     border-radius: 3px;
     padding: 1em;
     outline: none;
     border: none;
     border-radius: 5px;
     cursor: auto;
-    border-bottom: 1px solid #ff7814;
+    border-bottom: 1px solid var(--orange-gold-color);
     transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
@@ -102,14 +171,14 @@ SEARCH INPUT ELEMENTS
     top: 27px;
     right: 10px;
     border-radius: 100%;
-    background: #040200;
+    background: var(--deep-brown-black-color);
     border-width: 1px;
-    border-color: #ff7814;
+    border-color: var(--orange-gold-color);
     font-size: 1.1rem;
     text-align: center;
-    color: #b07e2a;
+    color: var(--muted-gold-color);
     box-shadow: 0 0 15px var(--primary-black-color) inset;
-    text-shadow: 1px 1px 1px #ffd700;
+    text-shadow: 1px 1px 1px var(--bright-gold-color);
     transition: .5s ease-out;
     cursor: pointer;
 
@@ -120,7 +189,7 @@ label {
     width: 147px;
     cursor: pointer;
     margin-left: 18px;
-    color: #ffd700;
+    color: var(--bright-gold-color);
     transform: translateY(-15px);
     transition: transform .2s ease-in-out;
 }
@@ -136,10 +205,10 @@ label {
     top: 80px;
     display: none;
     padding: 5px 10px;
-    background: rgba(4, 2, 0, 0.5);
+    background: var(--option-transparent-bg);
     border-radius: 2px;
-    border: solid #ff7814 1px;
-    color: #ffd700;
+    border: solid var(--orange-gold-color) 1px;
+    color: var(--bright-gold-color);
     width: 100%;
     z-index: 201;
     max-height: 35.500em;
@@ -150,24 +219,24 @@ label {
 
 option {
     padding: 0.825em;
-    background: rgba(4, 2, 0, 0.6);
+    background: var(--option-transparent-bg);
     text-align: center;
-    border: 1px solid#ff7814;
+    border: 1px solid var(--orange-gold-color);
     width: 90%;
     margin: 5px auto;
     border-radius: 5px;
 }
 
 option:hover {
-    color: #040200;
-    background: #ffd700;
+    color: var(--deep-brown-black-color);
+    background: var(--bright-gold-color);
 }
 
 #search-input:hover {
-    background: #ffd700;
-    color: #040200;
-    box-shadow: 0 0 7px #040200 inset;
-    border-bottom: 3px solid #a54f0c;
+    background: var(--bright-gold-color);
+    color: var(--deep-brown-black-color);
+    box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
+    border-bottom: 3px solid var(--burnt-orange-color);
 
 }
 
@@ -177,11 +246,12 @@ option:hover {
 #search-input:focus {
     width: 100%;
     right: 0;
-    background: #ffd700;
-    color: #040200;
-    box-shadow: 0 0 7px #040200 inset;
-    caret-color: #040200;
-    border-bottom: 3px solid #a54f0c;
+    background: var(--bright-gold-color);
+    color: var(--deep-brown-black-color);
+    box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
+    border-bottom: 3px solid var(--burnt-orange-color);
+    caret-color: var(--deep-brown-black-color);
+
 
 }
 
@@ -212,8 +282,8 @@ Main
     max-width: 1400px;
     margin: 2rem auto;
     padding: 1rem;
-    background: rgba(1, 0, 0, 0.6);
-    border: solid rgb(243, 210, 108) 1px;
+    background: var(--main-transparent-bg);
+    border: solid var(--light-gold-color) 1px;
 
 }
 
@@ -248,9 +318,9 @@ Main
     max-width: 280px;
     margin: 0 auto;
     padding: 10px;
-    background: rgb(6, 5, 10);
+    background: var(--dark-card-bg);
     border-radius: 0.25em;
-    border: solid rgb(120, 114, 79) 1px;
+    border: solid var(--card-border-color) 1px;
     transition: .4s ease-out;
     overflow: hidden;
 
@@ -259,15 +329,12 @@ Main
 .card-img-container {
     width: 90px;
     height: 90px;
-    background: rgb(243, 210, 108);
-    background: linear-gradient(49deg,
-            #241701 0%,
-            #c9933b 40%,
-            #ffd700 100%);
+    background: var(--light-gold-color);
+    background: var(--card-image-gradient);
     border-radius: 50%;
     padding: 5px;
     margin-right: 5px;
-    box-shadow: 0 1px 3px #f9ee8d;
+    box-shadow: 0 1px 3px var(--pale-gold-shadow-color);
     transition: transform .4s ease-out;
 }
 
@@ -284,14 +351,13 @@ Main
 
 .card-name {
     margin: 20px auto 0;
-    color: #ffd700;
+    color: var(--bright-gold-color);
     /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
 }
 
 .card-text {
     font-size: 0.770em;
-    color: rgba(50, 50, 50, 0.7);
-    color: rgb(249, 204, 145);
+    color: var(--card-text-color);
     margin: 7px auto;
     transition: .4s ease-out;
 }
@@ -393,19 +459,19 @@ Main
 ::-webkit-scrollbar,
 #data-names::-webkit-scrollbar {
     width: 20px;
-    background: #040200;
+    background: var(--deep-brown-black-color);
 }
 
 ::-webkit-scrollbar-track,
 #data-names::-webkit-scrollbar-track {
-    background: #040200;
-    box-shadow: inset 0 0 10px #ffd700;
+    background: var(--deep-brown-black-color);
+    box-shadow: inset 0 0 10px var(--bright-gold-color);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb,
 #data-names::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 15px #a54f0c;
+    box-shadow: inset 0 0 15px var(--burnt-orange-color);
     border-radius: 10px;
 }
 
@@ -439,7 +505,7 @@ Main
     .heading,
     .awesome {
 
-        text-shadow: 1px 1px 1px #3f3c22;
+        text-shadow: 1px 1px 1px var(--heading-shadow-color);
     }
 
 
@@ -464,12 +530,12 @@ SEARCH INPUT ELEMENTS
 
 
     .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
     }
 
     .card-container,
     .card {
-        max-width: 320px;
+        max-width: 370px;
     }
 
     .card-img-container {
@@ -489,7 +555,6 @@ SEARCH INPUT ELEMENTS
 
     .card-name {
         margin: 20px auto 0;
-        color: #ffd700;
         /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
     }
 
@@ -547,36 +612,32 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
 ======================================== */
 
     .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
 
     .card-container,
     .card {
-        max-width: 360px;
+        max-width: 400px;
     }
 
     .card:hover {
         background: #f7f3d9;
-        box-shadow: inset 0px 0px 4px rgba(6, 5, 10);
-        border-color: rgba(6, 5, 10);
+        box-shadow: inset 0px 0px 4px var(--card-dark-shadow-color);
+        border-color: var(--image-dark-shadow-color);
     }
 
     .card:hover .card-name {
-        color: #241701;
-        text-shadow: 0 1px 1px rgb(247, 141, 41);
+        color: var(--dark-brown-color);
+        text-shadow: 0 1px 1px var(--orange-highlight-color);
     }
 
     .card:hover .card-text {
-        color: rgb(1, 0, 0);
+        color: var(--card-hover-text-color);
     }
 
     .card:hover .card-img-container {
-        background: linear-gradient(49deg,
-                #1d1200 0%,
-                #5f3910 35%,
-                #8e5a18 70%,
-                #c9933b 100%);
-        box-shadow: 0 1px 3px rgba(6, 5, 1);
+        background: var(--card-image-hover-gradient);
+        box-shadow: 0 1px 3px var(--image-dark-shadow-color);
         transform: translateX(-9px);
     }
 
