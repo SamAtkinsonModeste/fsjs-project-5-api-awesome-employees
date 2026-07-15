@@ -9,6 +9,8 @@
     box-sizing: border-box;
 }
 
+
+
 html,
 body {
     width: 100%;
@@ -127,31 +129,12 @@ label {
     transform: scale(1.1);
 }
 
-#search-input:active,
-#search-input:hover,
-#search-input:focus {
-    width: 100%;
-    right: 0;
-    background: #ffd700;
-    color: var(--primary-black-color);
-    box-shadow: 0 0 15px var(--primary-black-color) inset;
-    caret-color: #040200;
-    border-bottom: 3px solid #a54f0c;
-
-}
-
-#search-input:active~label,
-#search-input:hover~label,
-#search-input:focus~label {
-    transform: translateY(-62px);
-
-}
 
 /*Datalist & Options*/
 #data-names {
     position: absolute;
     top: 80px;
-    display: block;
+    display: none;
     padding: 5px 10px;
     background: rgba(4, 2, 0, 0.5);
     border-radius: 2px;
@@ -180,8 +163,41 @@ option:hover {
     background: #ffd700;
 }
 
+#search-input:hover {
+    background: #ffd700;
+    color: #040200;
+    box-shadow: 0 0 7px #040200 inset;
+    border-bottom: 3px solid #a54f0c;
+
+}
 
 
+
+#search-input:active,
+#search-input:focus {
+    width: 100%;
+    right: 0;
+    background: #ffd700;
+    color: #040200;
+    box-shadow: 0 0 7px #040200 inset;
+    caret-color: #040200;
+    border-bottom: 3px solid #a54f0c;
+
+}
+
+
+
+#search-input:hover~label,
+#search-input:active~label,
+#search-input:focus~label {
+    transform: translateY(-62px);
+
+}
+
+#search-input:active~#data-names,
+#search-input:focus~#data-names {
+    display: block;
+}
 
 
 
@@ -192,7 +208,7 @@ Main
 ======================================== */
 
 .main {
-    width: 95%;
+    width: 100%;
     max-width: 1400px;
     margin: 2rem auto;
     padding: 1rem;
@@ -208,14 +224,17 @@ Main
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
+    justify-items: center;
     /* border: solid rgb(255, 171, 52) 1px; */
 }
 
 .card-container {
-    /* border: solid rgb(255, 52, 52) 1px; */
+    width: 100%;
+    max-width: 290px;
     margin: 8px 0;
+    /* border: solid rgb(255, 52, 52) 1px; */
 }
 
 
@@ -226,7 +245,7 @@ Main
     justify-content: flex-start;
     cursor: pointer;
     width: 100%;
-    max-width: 360px;
+    max-width: 280px;
     margin: 0 auto;
     padding: 10px;
     background: rgb(6, 5, 10);
@@ -238,8 +257,8 @@ Main
 }
 
 .card-img-container {
-    width: 105px;
-    height: 105px;
+    width: 90px;
+    height: 90px;
     background: rgb(243, 210, 108);
     background: linear-gradient(49deg,
             #241701 0%,
@@ -247,13 +266,13 @@ Main
             #ffd700 100%);
     border-radius: 50%;
     padding: 5px;
-    margin-right: 10px;
+    margin-right: 5px;
     box-shadow: 0 1px 3px #f9ee8d;
     transition: transform .4s ease-out;
 }
 
 .card-img {
-    width: 95px;
+    width: 80px;
     display: block;
     margin: 0 auto;
     border-radius: 50%;
@@ -270,7 +289,7 @@ Main
 }
 
 .card-text {
-    font-size: 0.9em;
+    font-size: 0.770em;
     color: rgba(50, 50, 50, 0.7);
     color: rgb(249, 204, 145);
     margin: 7px auto;
@@ -397,6 +416,8 @@ Main
    Media Queries
 ======================================== */
 
+
+
 /* =====================================
    Tablet
 ======================================== */
@@ -437,35 +458,47 @@ SEARCH INPUT ELEMENTS
     /* =====================================
    Gallery MEDIA 768PX
 ======================================== */
+    .main {
+        width: 95%;
+    }
+
 
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     }
 
-    .card:hover {
-        background: #f7f3d9;
-        box-shadow: inset 0px 0px 4px rgba(6, 5, 10);
-        border-color: rgba(6, 5, 10);
+    .card-container,
+    .card {
+        max-width: 320px;
     }
 
-    .card:hover .card-name {
-        color: #241701;
-        text-shadow: 0 1px 1px rgb(247, 141, 41);
+    .card-img-container {
+        width: 105px;
+        height: 105px;
+        padding: 5px;
+        margin-right: 10px;
     }
 
-    .card:hover .card-text {
-        color: rgb(1, 0, 0);
+    .card-img {
+        width: 95px;
     }
 
-    .card:hover .card-img-container {
-        background: linear-gradient(49deg,
-                #1d1200 0%,
-                #5f3910 35%,
-                #8e5a18 70%,
-                #c9933b 100%);
-        box-shadow: 0 1px 3px rgba(6, 5, 1);
-        transform: translateX(-9px);
+    .card-info-container {
+        text-align: left;
     }
+
+    .card-name {
+        margin: 20px auto 0;
+        color: #ffd700;
+        /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
+    }
+
+    .card-text {
+        font-size: 0.9em;
+    }
+
+
+
 
     /*===============================
 MODALS MEDIA 768PX
@@ -510,11 +543,41 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
     }
 
     /* =====================================
-   Gallery MEDIA 768PX
+   Gallery MEDIA 1024PX
 ======================================== */
 
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    }
+
+    .card-container,
+    .card {
+        max-width: 360px;
+    }
+
+    .card:hover {
+        background: #f7f3d9;
+        box-shadow: inset 0px 0px 4px rgba(6, 5, 10);
+        border-color: rgba(6, 5, 10);
+    }
+
+    .card:hover .card-name {
+        color: #241701;
+        text-shadow: 0 1px 1px rgb(247, 141, 41);
+    }
+
+    .card:hover .card-text {
+        color: rgb(1, 0, 0);
+    }
+
+    .card:hover .card-img-container {
+        background: linear-gradient(49deg,
+                #1d1200 0%,
+                #5f3910 35%,
+                #8e5a18 70%,
+                #c9933b 100%);
+        box-shadow: 0 1px 3px rgba(6, 5, 1);
+        transform: translateX(-9px);
     }
 
 
