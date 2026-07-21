@@ -131,3 +131,69 @@ const createOverlay = () => {
 
   return overlay;
 };
+
+/**
+ * Creates and displays the employee modal for the selected employee.
+ * Retrieves the selected employee's data, formats their birthday,
+ * inserts the modal into the overlay, and returns the modal element.
+ *
+ * @param {number} index - The index of the selected employee in the employees array.
+ * @returns {HTMLElement} The modal element.
+ */
+const createModal = (index) => {
+  const employee = employees[index];
+  const innerOverlay = document.querySelector("#overlay-inner-container");
+
+  const {
+    name: { first, last },
+    email,
+    phone,
+    picture: { large },
+    location: {
+      city,
+      street: { number, name: streetName },
+      state,
+      postcode,
+    },
+    dob: { date },
+  } = employee;
+
+  const birthday = new Date(date).toLocaleDateString("en-GB");
+
+  const modalHTML = `
+  <div id="modal">
+    <button type="button" id="modal-close-btn" class="modal-close-btn">
+      <strong>X</strong>
+    </button>
+
+    <div class="modal-info-container">
+      <div class="modal-img-container">
+        <img class="modal-img" src="${large}" alt="${first} ${last}">
+      </div>
+
+      <h3 id="name" class="modal-name cap">${first} ${last}</h3>
+
+      <p class="modal-text">${email}</p>
+
+      <p class="modal-text cap">${city}</p>
+
+      <hr>
+
+      <p class="modal-text">${phone}</p>
+
+      <p class="modal-text">
+        ${number} ${streetName}, ${state} ${postcode}
+      </p>
+
+      <p class="modal-text">
+        Birthday: ${birthday}
+      </p>
+    </div>
+  </div>
+  `;
+
+  innerOverlay.insertAdjacentHTML("beforeend", modalHTML);
+
+  const modal = document.querySelector("#modal");
+  return modal;
+};
