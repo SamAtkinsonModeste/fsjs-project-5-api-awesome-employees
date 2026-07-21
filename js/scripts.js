@@ -80,6 +80,13 @@ function createEmployeeCards(employees) {
   });
 }
 
+/**
+ * Creates and displays the employee search interface.
+ * Generates the search input, clear button, label and datalist,
+ * then populates the datalist with each employee's full name.
+ *
+ * @param {Object[]} employees - Array of employee objects returned from the Random User API.
+ */
 function createSearchUI(employees) {
   const searchInput = `
    <input autocomplete="off" type="text" name="search" id="search-input" list="">
@@ -103,3 +110,24 @@ function createSearchUI(employees) {
     dataListElement.appendChild(option);
   });
 }
+
+/**
+ * Creates and displays the reusable overlay.
+ * Inserts the overlay into the end of the document body
+ * and returns the newly created overlay element.
+ *
+ * @returns {HTMLElement} The overlay element.
+ */
+const createOverlay = () => {
+  const overlayHTML = `
+  <div id="overlay">
+    <div id="overlay-inner-container">
+    </div>
+  </div>
+  `;
+
+  document.body.insertAdjacentHTML("beforeend", overlayHTML);
+  const overlay = document.querySelector("#overlay");
+
+  return overlay;
+};
