@@ -1,3 +1,4 @@
+let employees = [];
 const galleryDiv = document.querySelector("#gallery");
 const searchDiv = document.querySelector(".search-container");
 
@@ -27,12 +28,18 @@ async function fetchData(url) {
 async function fetchEmployeesData() {
   try {
     const data = await fetchData(randomUsersUrl);
-    createEmployeeCards(data.results);
-    createSearchUI(data.results);
+    console.log(data.results);
+    employees = data.results;
+    createEmployeeCards(employees);
+    createSearchUI(employees);
   } catch (error) {
     console.error(error);
   }
 }
+
+setTimeout(() => {
+  console.log(employees);
+}, 5000);
 
 //!SECTION - HELPER FUNCTIONS
 
@@ -43,23 +50,24 @@ async function fetchEmployeesData() {
  */
 function createEmployeeCards(employees) {
   employees.forEach((employee, index) => {
-    const firstName = employee.name.first;
-    const lastName = employee.name.last;
-    const employeeImage = employee.picture.large;
-    const email = employee.email;
-    const city = employee.location.city;
-    const state = employee.location.state;
+    const {
+      name: { first, last },
+      email,
+      phone,
+      picture: { large },
+      location: { city, state },
+    } = employee;
 
     const employeeHTML = `
      <div class="card-container" data-index="${index}">
         <div class="card">
 
           <div class="card-img-container">
-          <img class="card-img" src="${employeeImage}" alt="${firstName} ${lastName}">
+          <img class="card-img" src="${large}" alt="${first} ${last}">
           </div>
 
           <div class="card-info-container">
-          <h3 id="name" class="card-name cap">${firstName} ${lastName}</h3>
+          <h3 id="name" class="card-name cap">${first} ${last}</h3>
           <p class="card-text">${email}</p>
           <p class="card-text cap">${city}, ${state}</p>
           </div>
@@ -86,11 +94,12 @@ function createSearchUI(employees) {
   const dataListElement = document.querySelector("#data-names");
 
   employees.forEach((employee) => {
-    const firstName = employee.name.first;
-    const lastName = employee.name.last;
+    const {
+      name: { first, last },
+    } = employee;
     const option = document.createElement("option");
-    option.value = `${firstName} ${lastName}`;
-    option.textContent = `${firstName} ${lastName}`;
+    option.value = `${first} ${last}`;
+    option.textContent = `${first} ${last}`;
     dataListElement.appendChild(option);
   });
 }
