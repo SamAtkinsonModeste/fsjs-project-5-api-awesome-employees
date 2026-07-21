@@ -12,19 +12,19 @@
        Solid Colours
     ====================================== */
 
-    --primary-black-color: #050505;
+    --color-primary-black: #050505;
     --deep-black-color: #040000;
     --deep-brown-black-color: #040200;
 
     --dark-grey-color: #161616;
     --charcoal-grey-color: #1b1b1b;
 
-    --dark-card-bg: rgb(6, 5, 10);
+    --color-surface: rgb(6, 5, 10);
 
-    --bright-gold-color: #ffd700;
+    --color-primary: #ffd700;
     --warm-gold-color: #c9933b;
     --muted-gold-color: #b07e2a;
-    --orange-gold-color: #ff7814;
+    --color-accent: #ff7814;
     --burnt-orange-color: #a54f0c;
 
     --deep-brown-color: #1d1200;
@@ -34,7 +34,7 @@
 
     --light-gold-color: rgb(243, 210, 108);
     --card-border-color: rgb(120, 114, 79);
-    --card-text-color: rgb(249, 204, 145);
+    --color-text: rgb(249, 204, 145);
 
     --card-hover-bg: #f7f3d9;
     --card-hover-text-color: rgb(1, 0, 0);
@@ -50,15 +50,15 @@
     ====================================== */
 
     --main-transparent-bg: rgba(1, 0, 0, 0.6);
-
     --datalist-transparent-bg: rgba(4, 2, 0, 0.5);
     --option-transparent-bg: rgba(4, 2, 0, 0.6);
+    --color-primary-transparent: rgba(255, 215, 0, 0.8);
 
     /* ======================================
        Custom Gradients
     ====================================== */
 
-    --header-bg-gradient: linear-gradient(49deg,
+    --gradient-primary: linear-gradient(49deg,
             #050505 0%,
             #161616 30%,
             #1b1b1b 65%,
@@ -89,20 +89,22 @@ body {
 
 }
 
+
+body,
+header {
+    background: var(--gradient-primary);
+}
+
 body {
     font-family: "Raleway", sans-serif;
     text-align: center;
-    background: var(--header-bg-gradient);
     background: url(../images/body-bg.webp) no-repeat 20% top fixed;
     background-size: cover;
 }
 
 header {
     padding: 15px 5px 5px;
-    background: var(--header-bg-gradient);
-    box-shadow: 0 1px 1px var(--orange-gold-color);
-    ;
-
+    box-shadow: 0 1px 1px var(--color-accent);
 }
 
 .header-inner-container {
@@ -132,7 +134,7 @@ h2 {
     letter-spacing: 0.09em;
     line-height: 2em;
     text-align: center;
-    color: var(--bright-gold-color);
+    color: var(--color-primary);
 }
 
 /*=========================
@@ -160,28 +162,34 @@ SEARCH INPUT ELEMENTS
     border: none;
     border-radius: 5px;
     cursor: auto;
-    border-bottom: 1px solid var(--orange-gold-color);
+    border-bottom: 1px solid var(--color-accent);
     transition: width 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-#search-close {
+#search-close,
+.modal-close-btn {
     width: 25px;
     height: 25px;
     position: absolute;
     top: 27px;
     right: 10px;
     border-radius: 100%;
-    background: var(--deep-brown-black-color);
     border-width: 1px;
-    border-color: var(--orange-gold-color);
     font-size: 1.1rem;
     text-align: center;
-    color: var(--muted-gold-color);
-    box-shadow: 0 0 15px var(--primary-black-color) inset;
-    text-shadow: 1px 1px 1px var(--bright-gold-color);
     transition: .5s ease-out;
     cursor: pointer;
 
+}
+
+#search-close,
+.modal-close-btn,
+.modal-btn-container .btn {
+    background: var(--deep-brown-black-color);
+    border-color: var(--color-accent);
+    color: var(--muted-gold-color);
+    box-shadow: 0 0 15px var(--color-primary-black) inset;
+    text-shadow: 1px 1px 1px var(--color-primary);
 }
 
 label {
@@ -189,7 +197,7 @@ label {
     width: 147px;
     cursor: pointer;
     margin-left: 18px;
-    color: var(--bright-gold-color);
+    color: var(--color-primary);
     transform: translateY(-15px);
     transition: transform .2s ease-in-out;
 }
@@ -207,8 +215,8 @@ label {
     padding: 5px 10px;
     background: var(--option-transparent-bg);
     border-radius: 2px;
-    border: solid var(--orange-gold-color) 1px;
-    color: var(--bright-gold-color);
+    border: solid var(--color-accent) 1px;
+    color: var(--color-primary);
     width: 100%;
     z-index: 201;
     max-height: 35.500em;
@@ -221,7 +229,7 @@ option {
     padding: 0.825em;
     background: var(--option-transparent-bg);
     text-align: center;
-    border: 1px solid var(--orange-gold-color);
+    border: 1px solid var(--color-accent);
     width: 90%;
     margin: 5px auto;
     border-radius: 5px;
@@ -229,11 +237,11 @@ option {
 
 option:hover {
     color: var(--deep-brown-black-color);
-    background: var(--bright-gold-color);
+    background: var(--color-primary);
 }
 
 #search-input:hover {
-    background: var(--bright-gold-color);
+    background: var(--color-primary);
     color: var(--deep-brown-black-color);
     box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
     border-bottom: 3px solid var(--burnt-orange-color);
@@ -246,7 +254,7 @@ option:hover {
 #search-input:focus {
     width: 100%;
     right: 0;
-    background: var(--bright-gold-color);
+    background: var(--color-primary);
     color: var(--deep-brown-black-color);
     box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
     border-bottom: 3px solid var(--burnt-orange-color);
@@ -307,7 +315,6 @@ Main
     /* border: solid rgb(255, 52, 52) 1px; */
 }
 
-
 .card {
     display: flex;
     flex-direction: row;
@@ -318,18 +325,24 @@ Main
     max-width: 280px;
     margin: 0 auto;
     padding: 10px;
-    background: var(--dark-card-bg);
     border-radius: 0.25em;
-    border: solid var(--card-border-color) 1px;
     transition: .4s ease-out;
     overflow: hidden;
 
 }
 
-.card-img-container {
+.card,
+.modal,
+.modal-btn-container {
+    background: var(--color-surface);
+    border-radius: 0.25em;
+    border: solid var(--card-border-color) 1px;
+}
+
+.card-img-container,
+.modal-img-container {
     width: 90px;
     height: 90px;
-    background: var(--light-gold-color);
     background: var(--card-image-gradient);
     border-radius: 50%;
     padding: 5px;
@@ -338,7 +351,8 @@ Main
     transition: transform .4s ease-out;
 }
 
-.card-img {
+.card-img,
+.modal-img {
     width: 80px;
     display: block;
     margin: 0 auto;
@@ -349,17 +363,31 @@ Main
     text-align: left;
 }
 
-.card-name {
+.card-name,
+.modal-name {
     margin: 20px auto 0;
-    color: var(--bright-gold-color);
+    color: var(--color-primary);
     /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
 }
 
-.card-text {
+.card-text,
+.modal-text {
     font-size: 0.770em;
-    color: var(--card-text-color);
+    color: var(--color-text);
     margin: 7px auto;
     transition: .4s ease-out;
+}
+
+.modal-text:nth-child(3n) {
+    color: var(--color-accent);
+}
+
+.modal-text:nth-child(4n) {
+    color: var(--light-gold-color);
+}
+
+.modal-text:last-of-type {
+    color: var(--color-primary);
 }
 
 .cap {
@@ -368,28 +396,38 @@ Main
 
 
 /* =====================================
-   Modal
+   Overlay & Modal
 ======================================== */
 
-.modal-container {
+#overlay {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-transparent-bg);
 }
 
-.modal {
+
+#overlay-inner-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: solid 1px rgb(255, 52, 52); */
+}
+
+#modal {
     position: relative;
     width: 95%;
     max-width: 420px;
     min-height: 415px;
     margin: 10px auto auto;
     padding-bottom: 15px;
-    background: rgba(255, 255, 255, 1);
     border-radius: 0.25em;
-    border: 1px solid rgba(100, 100, 100, 0.3);
     transition: .4s ease-out;
 }
 
@@ -398,10 +436,10 @@ Main
     top: 15px;
     right: 15px;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 0.25em;
-    border: 1px solid rgba(50, 50, 50, 0.3);
+}
+
+.modal-img-container {
+    margin: 5px auto;
 }
 
 .modal-img {
@@ -415,14 +453,14 @@ Main
 }
 
 .modal-text {
-    color: rgba(50, 50, 50, 0.7);
     margin: 10px;
 }
 
 .modal hr {
     width: 75%;
     margin: 25px auto 30px;
-    border-color: rgba(200, 200, 200, 0.2);
+    border-color: var(--color-primary-transparent);
+    box-shadow: 0 1px 2px var(--card-hover-bg);
 }
 
 .modal-btn-container {
@@ -433,11 +471,9 @@ Main
     width: 95%;
     max-width: 420px;
     padding: 10px 15px 15px;
-    ;
     margin: 10px auto auto;
-    background: rgba(255, 255, 255, 1);
     border-radius: 0.25em;
-    border: 1px solid rgba(100, 100, 100, 0.3);
+
 }
 
 
@@ -446,9 +482,7 @@ Main
     cursor: pointer;
     font-size: 0.85em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
     padding: 0.75em 1.5em;
-    background: rgba(0, 0, 0, 0.8);
     border-radius: 0.35em;
     transition: .4s ease-out;
 }
@@ -465,7 +499,7 @@ Main
 ::-webkit-scrollbar-track,
 #data-names::-webkit-scrollbar-track {
     background: var(--deep-brown-black-color);
-    box-shadow: inset 0 0 10px var(--bright-gold-color);
+    box-shadow: inset 0 0 10px var(--color-primary);
     border-radius: 10px;
 }
 
@@ -538,14 +572,20 @@ SEARCH INPUT ELEMENTS
         max-width: 370px;
     }
 
-    .card-img-container {
+    .card-img-container,
+    .modal-img-container {
         width: 105px;
         height: 105px;
+
+    }
+
+    .card-img-container {
         padding: 5px;
         margin-right: 10px;
     }
 
-    .card-img {
+    .card-img,
+    .modal-img {
         width: 95px;
     }
 
@@ -558,7 +598,8 @@ SEARCH INPUT ELEMENTS
         /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
     }
 
-    .card-text {
+    .card-text,
+    .modal-text {
         font-size: 0.9em;
     }
 
@@ -571,6 +612,14 @@ MODALS MEDIA 768PX
 
     .modal {
         margin-top: 100px;
+    }
+
+    .modal-name {
+        font-size: 1.3rem;
+    }
+
+    .modal-text {
+        font-size: 1.2em;
     }
 
 }
@@ -601,10 +650,16 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
 
 
     #search-close {
-        width: 30px;
-        height: 30px;
         top: 25px;
         right: 6px;
+    }
+
+    #search-close,
+    .modal-close-btn {
+        font-size: 1.3rem;
+        width: 30px;
+        height: 30px;
+
     }
 
     /* =====================================
@@ -621,9 +676,9 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
     }
 
     .card:hover {
-        background: #f7f3d9;
-        box-shadow: inset 0px 0px 4px var(--card-dark-shadow-color);
-        border-color: var(--image-dark-shadow-color);
+        background: var(--card-hover-bg);
+        box-shadow: inset 0px 0px 12px var(--image-dark-shadow-color);
+        border-color: var(--color-primary);
     }
 
     .card:hover .card-name {
@@ -643,7 +698,17 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
 
 
     .btn:hover {
-        background: rgba(255, 255, 255, 1);
-        color: rgba(25, 25, 25, 1);
+        background: var(--color-accent);
+        color: var(--deep-black-color);
+        box-shadow: inset 0px 0px 4px var(--color-primary-black);
+        border-color: var(--color-primary);
+    }
+
+    .modal-name {
+        font-size: 1.5rem;
+    }
+
+    .modal-text {
+        font-size: 1.3em;
     }
 }
