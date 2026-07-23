@@ -28,8 +28,9 @@ async function fetchData(url) {
 async function fetchEmployeesData() {
   try {
     const data = await fetchData(randomUsersUrl);
-    console.log(data.results);
     employees = data.results;
+    console.log(employees);
+    console.log("Above is now the value in - let employees = [];");
     createEmployeeCards(employees);
     createSearchUI(employees);
   } catch (error) {
@@ -128,7 +129,6 @@ const createOverlay = () => {
 
   document.body.insertAdjacentHTML("beforeend", overlayHTML);
   const overlay = document.querySelector("#overlay");
-
   return overlay;
 };
 
@@ -141,6 +141,9 @@ const createOverlay = () => {
  * @returns {HTMLElement} The modal element.
  */
 const createModal = (index) => {
+  console.log(employees);
+  console.log(index);
+  console.log(employees[index]);
   const employee = employees[index];
   const innerOverlay = document.querySelector("#overlay-inner-container");
 
@@ -182,7 +185,7 @@ const createModal = (index) => {
       <p class="modal-text">${phone}</p>
 
       <p class="modal-text">
-        ${number} ${streetName}, ${state} ${postcode}
+        ${number} ${streetName}<br> ${state}<br> ${postcode}
       </p>
 
       <p class="modal-text">
@@ -197,3 +200,44 @@ const createModal = (index) => {
   const modal = document.querySelector("#modal");
   return modal;
 };
+
+/**
+ * Creates and displays the modal navigation controls.
+ * Inserts the Previous and Next buttons into the overlay
+ * and returns the navigation container element.
+ *
+ * @returns {HTMLElement} The modal navigation container element.
+ */
+const createModalNav = () => {
+  const innerOverlay = document.querySelector("#overlay-inner-container");
+
+  const modalNavHTML = `
+  <div class="modal-btn-container">
+    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+    <button type="button" id="modal-next" class="modal-next btn">Next</button>
+  </div>
+  `;
+
+  innerOverlay.insertAdjacentHTML("beforeend", modalNavHTML);
+
+  const modalNavContainer = document.querySelector(".modal-btn-container");
+
+  return modalNavContainer;
+};
+
+/**
+ * Displays the selected employee in a modal window.
+ * Creates the overlay, employee modal, and navigation controls
+ * for the selected employee.
+ *
+ * @param {number} index - The index of the selected employee.
+ */
+const displayEmployeeModal = (index) => {
+  createOverlay();
+  createModal(index);
+  createModalNav();
+};
+
+setTimeout(() => {
+  displayEmployeeModal(6);
+}, 5000);
