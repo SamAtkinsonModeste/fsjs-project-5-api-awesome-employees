@@ -1,4 +1,5 @@
 let employees = [];
+let activeEmployee;
 const galleryDiv = document.querySelector("#gallery");
 const searchDiv = document.querySelector(".search-container");
 
@@ -238,6 +239,51 @@ const displayEmployeeModal = (index) => {
   createModalNav();
 };
 
-setTimeout(() => {
-  displayEmployeeModal(6);
-}, 5000);
+/**
+ * Handles all button clicks inside the employee modal overlay.
+ * Determines which button was clicked and performs the appropriate action.
+ *
+ * @param {Event} evt - The click event object.
+ */
+const handleOverlayBtnsClick = (evt) => {
+  // Find the closest button that was clicked.
+  const clickedBtn = evt.target.closest("button");
+
+  // Exit if the click did not occur on a button.
+  if (!clickedBtn) return;
+
+  // Get the overlay element.
+  const overlay = document.querySelector("#overlay");
+
+  // Close the modal overlay.
+  if (clickedBtn.id === "modal-close-btn") {
+    overlay.remove();
+  }
+
+  // Display the previous employee.
+  if (clickedBtn.id === "modal-prev") {
+    activeEmployee -= 1;
+    document.querySelector("#modal").remove();
+    createModal(activeEmployee);
+  }
+
+  // Display the next employee.
+  if (clickedBtn.id === "modal-next") {
+    activeEmployee += 1;
+    document.querySelector("#modal").remove();
+    createModal(activeEmployee);
+  }
+
+  // Hide the Previous button when viewing the first employee.
+  if (activeEmployee === 0) {
+    document.querySelector("#modal-prev").style.visibility = "hidden";
+  }
+  // Hide the Next button when viewing the last employee.
+  else if (activeEmployee === employees.length - 1) {
+    document.querySelector("#modal-next").style.visibility = "hidden";
+  }
+};
+
+// setTimeout(() => {
+//   displayEmployeeModal(6);
+// }, 5000);
