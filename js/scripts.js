@@ -196,7 +196,7 @@ const createModal = (index) => {
   </div>
   `;
 
-  innerOverlay.insertAdjacentHTML("beforeend", modalHTML);
+  innerOverlay.insertAdjacentHTML("afterbegin", modalHTML);
 
   const modal = document.querySelector("#modal");
   return modal;
@@ -209,7 +209,7 @@ const createModal = (index) => {
  *
  * @returns {HTMLElement} The modal navigation container element.
  */
-const createModalNav = (index) => {
+const createModalNav = () => {
   const innerOverlay = document.querySelector("#overlay-inner-container");
 
   const modalNavHTML = `
@@ -222,29 +222,25 @@ const createModalNav = (index) => {
   innerOverlay.insertAdjacentHTML("beforeend", modalNavHTML);
 
   const modalNavContainer = document.querySelector(".modal-btn-container");
-  const prevBtn = modalNavContainer.querySelector("#modal-prev");
-  const nextBtn = modalNavContainer.querySelector("#modal-next");
-
-  if (index === 0) {
-    prevBtn.style.visibility = "hidden";
-  } else if (index === employees.length - 1) {
-    nextBtn.style.visibility = "hidden";
-  }
-
   return modalNavContainer;
 };
 
 /**
- * Displays the selected employee in a modal window.
- * Creates the overlay, employee modal, and navigation controls
- * for the selected employee.
+ * Displays the selected employee's modal interface.
+ * Stores the selected employee's index, creates the overlay,
+ * employee modal and navigation controls, sets the initial
+ * navigation button visibility, then attaches the overlay
+ * button click handler.
  *
- * @param {number} index - The index of the selected employee.
+ * @param {number|string} index - The selected employee's array index.
  */
 const displayEmployeeModal = (index) => {
-  createOverlay();
-  createModal(index);
-  createModalNav(index);
+  activeEmployee = Number(index);
+  const overlay = createOverlay();
+  createModal(activeEmployee);
+  createModalNav();
+  updateModalBtnsVisibility();
+  overlay.addEventListener("click", handleOverlayBtnsClick);
 };
 
 /**
@@ -277,12 +273,15 @@ const handleOverlayBtnsClick = (evt) => {
 
   if (clickedBtn.id === "modal-close-btn") {
     overlay.remove();
-  } else if (clickedBtn.id === "modal-prev") {
+  } else if (clickedBtn.id === "modal-prev" && activeEmployee > 0) {
     activeEmployee -= 1;
     document.querySelector("#modal").remove();
     createModal(activeEmployee);
     updateModalBtnsVisibility();
-  } else if (clickedBtn.id === "modal-next") {
+  } else if (
+    clickedBtn.id === "modal-next" &&
+    activeEmployee < employees.length - 1
+  ) {
     activeEmployee += 1;
     document.querySelector("#modal").remove();
     createModal(activeEmployee);
@@ -307,5 +306,6 @@ galleryDiv.addEventListener("click", (evt) => {
   if (!employeeCard) return;
 
   const employeeIndex = employeeCard.getAttribute("data-index");
+  console.log(employeeIndex);
   displayEmployeeModal(employeeIndex);
 });
