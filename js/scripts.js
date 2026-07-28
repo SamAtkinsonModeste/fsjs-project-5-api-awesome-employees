@@ -209,7 +209,7 @@ const createModal = (index) => {
  *
  * @returns {HTMLElement} The modal navigation container element.
  */
-const createModalNav = () => {
+const createModalNav = (index) => {
   const innerOverlay = document.querySelector("#overlay-inner-container");
 
   const modalNavHTML = `
@@ -222,6 +222,14 @@ const createModalNav = () => {
   innerOverlay.insertAdjacentHTML("beforeend", modalNavHTML);
 
   const modalNavContainer = document.querySelector(".modal-btn-container");
+  const prevBtn = modalNavContainer.querySelector("#modal-prev");
+  const nextBtn = modalNavContainer.querySelector("#modal-next");
+
+  if (index === 0) {
+    prevBtn.style.visibility = "hidden";
+  } else if (index === employees.length - 1) {
+    nextBtn.style.visibility = "hidden";
+  }
 
   return modalNavContainer;
 };
@@ -236,51 +244,49 @@ const createModalNav = () => {
 const displayEmployeeModal = (index) => {
   createOverlay();
   createModal(index);
-  createModalNav();
+  createModalNav(index);
+};
+
+/**
+ * Updates the visibility of the modal navigation buttons.
+ * Hides the Previous button when the first employee is displayed
+ * and hides the Next button when the last employee is displayed.
+ */
+const updateModalBtnsVisibility = () => {
+  const prevBtn = document.querySelector("#modal-prev");
+  const nextBtn = document.querySelector("#modal-next");
+
+  prevBtn.style.visibility = activeEmployee === 0 ? "hidden" : "visible";
+  nextBtn.style.visibility =
+    activeEmployee === employees.length - 1 ? "hidden" : "visible";
 };
 
 /**
  * Handles all button clicks inside the employee modal overlay.
- * Determines which button was clicked and performs the appropriate action.
+ * Closes the overlay or navigates between employees by
+ * recreating the modal content and updating the navigation buttons.
  *
  * @param {Event} evt - The click event object.
  */
 const handleOverlayBtnsClick = (evt) => {
-  // Find the closest button that was clicked.
   const clickedBtn = evt.target.closest("button");
 
-  // Exit if the click did not occur on a button.
   if (!clickedBtn) return;
 
-  // Get the overlay element.
   const overlay = document.querySelector("#overlay");
 
-  // Close the modal overlay.
   if (clickedBtn.id === "modal-close-btn") {
     overlay.remove();
-  }
-
-  // Display the previous employee.
-  if (clickedBtn.id === "modal-prev") {
+  } else if (clickedBtn.id === "modal-prev") {
     activeEmployee -= 1;
     document.querySelector("#modal").remove();
     createModal(activeEmployee);
-  }
-
-  // Display the next employee.
-  if (clickedBtn.id === "modal-next") {
+    updateModalBtnsVisibility();
+  } else if (clickedBtn.id === "modal-next") {
     activeEmployee += 1;
     document.querySelector("#modal").remove();
     createModal(activeEmployee);
-  }
-
-  // Hide the Previous button when viewing the first employee.
-  if (activeEmployee === 0) {
-    document.querySelector("#modal-prev").style.visibility = "hidden";
-  }
-  // Hide the Next button when viewing the last employee.
-  else if (activeEmployee === employees.length - 1) {
-    document.querySelector("#modal-next").style.visibility = "hidden";
+    updateModalBtnsVisibility();
   }
 };
 
