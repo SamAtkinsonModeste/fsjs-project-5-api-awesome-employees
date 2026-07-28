@@ -293,3 +293,19 @@ const handleOverlayBtnsClick = (evt) => {
 // setTimeout(() => {
 //   displayEmployeeModal(6);
 // }, 5000);
+
+//!SECTION - EVENT LISTENERS
+
+/**
+ * Opens the employee modal when an employee card is clicked.
+ * Uses event delegation to identify the selected employee and
+ * passes its index to the modal display controller.
+ */
+galleryDiv.addEventListener("click", (evt) => {
+  const employeeCard = evt.target.closest(".card-container");
+
+  if (!employeeCard) return;
+
+  const employeeIndex = employeeCard.getAttribute("data-index");
+  displayEmployeeModal(employeeIndex);
+});
