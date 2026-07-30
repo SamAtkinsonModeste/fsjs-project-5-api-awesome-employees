@@ -111,7 +111,72 @@ function createSearchUI(employees) {
     option.textContent = `${first} ${last}`;
     dataListElement.appendChild(option);
   });
+
+  const searchValue = document.querySelector("#search-input");
+  searchValue.addEventListener("input", updateFilterEmployees);
+  // undateFilterEmployees();
 }
+
+/**
+ * Retrieves the current value from the search input and
+ * formats it for case-insensitive searching.
+ *
+ * @returns {string} The trimmed, lowercase search value.
+ */
+const getSearchInputValue = () => {
+  const input = document.querySelector("#search-input");
+  const formattedSearchValue = input.value.trim().toLowerCase();
+  return formattedSearchValue;
+};
+
+/**
+ * Filters the displayed employee cards and search options
+ * based on the current search input. Also updates the search
+ * interface when no matches or a single match remain.
+ */
+const updateFilterEmployees = () => {
+  const inputValue = getSearchInputValue();
+  const datalist = document.querySelector("#data-names");
+  const currentOptions = datalist.querySelectorAll("option");
+  const cards = document.querySelectorAll(".card-container");
+  let optionCount = 0;
+  console.log(datalist);
+  console.log(currentOptions);
+
+  currentOptions.forEach((currentOption, i) => {
+    const currentOptionValue = currentOption.value.toLowerCase();
+    const employeeCard = document.querySelector(`[data-index="${i}"]`);
+
+    if (inputValue === "") {
+      currentOption.classList.remove("optionFiltered");
+      currentOption.classList.remove("hide");
+      employeeCard.style.display = "block";
+      datalist.classList.remove("hide");
+    } else if (currentOptionValue.includes(inputValue) && inputValue !== "") {
+      currentOption.classList.add("optionFiltered");
+      currentOption.classList.remove("hide");
+      employeeCard.style.display = "initial";
+      optionCount++;
+    } else {
+      console.log(inputValue);
+      currentOption.classList.remove("optionFiltered");
+      currentOption.classList.add("hide");
+      employeeCard.style.display = "none";
+    }
+  });
+
+  if (optionCount === 1) {
+    datalist.classList.add("hide");
+    currentOptions.forEach((currentOption) => {
+      currentOption.classList.remove("optionFiltered");
+      currentOption.classList.remove("hide");
+    });
+  }
+
+  console.log(optionCount);
+};
+
+const optionClickEvents = () => {};
 
 /**
  * Creates and displays the reusable overlay.
@@ -293,7 +358,7 @@ const handleOverlayBtnsClick = (evt) => {
 //   displayEmployeeModal(6);
 // }, 5000);
 
-//!SECTION - EVENT LISTENERS
+//!SECTION - EVENT LISTENER
 
 /**
  * Opens the employee modal when an employee card is clicked.
