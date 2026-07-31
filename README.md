@@ -8,7 +8,7 @@
   - [🔍 Search & Filtering](#-search--filtering)
   - [👥 Employee Gallery](#-employee-gallery)
   - [🪟 Employee Modal & Overlay](#-employee-modal--overlay)
-  - [⬅️➡️ Modal Navigation](#️-modal-navigation)
+  - [🔄 Modal Navigation](#-modal-navigation)
 - [🛠️ Technologies Used](#️-technologies-used)
 - [🐞 Bugs & Fixes](#-bugs--fixes)
 - [🧪 Testing](#-testing)
@@ -179,7 +179,7 @@ The overlay helps keep the user's focus on the selected profile while subtly dim
 
 ---
 
-### ⬅️➡️ Modal Navigation
+### 🔄 Modal Navigation
 
 To improve the browsing experience, the employee modal includes **Previous** and **Next** navigation buttons, allowing users to move seamlessly through the employee directory without returning to the gallery.
 
