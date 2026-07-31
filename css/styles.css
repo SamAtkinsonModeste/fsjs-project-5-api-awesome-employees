@@ -1,94 +1,64 @@
 /* =====================================
    Public API Request
 ======================================== */
+
 @import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@500&family=Bad+Script&family=Raleway+Dots&family=Raleway:wght@700&display=swap");
 /* ======================================
    Custom Colour Variables
 ======================================== */
 
 :root {
-
     /* ======================================
        Solid Colours
     ====================================== */
-
     --color-primary-black: #050505;
     --deep-black-color: #040000;
     --deep-brown-black-color: #040200;
-
     --dark-grey-color: #161616;
     --charcoal-grey-color: #1b1b1b;
-
     --color-surface: rgb(6, 5, 10);
-
     --color-primary: #ffd700;
     --warm-gold-color: #c9933b;
     --muted-gold-color: #b07e2a;
     --color-accent: #ff7814;
     --burnt-orange-color: #a54f0c;
-
     --deep-brown-color: #1d1200;
     --dark-brown-color: #241701;
     --medium-brown-color: #5f3910;
     --light-brown-color: #8e5a18;
-
     --light-gold-color: rgb(243, 210, 108);
     --card-border-color: rgb(120, 114, 79);
     --color-text: rgb(249, 204, 145);
-
     --card-hover-bg: #f7f3d9;
     --card-hover-text-color: rgb(1, 0, 0);
-
     --heading-shadow-color: #3f3c22;
     --pale-gold-shadow-color: #f9ee8d;
     --orange-highlight-color: rgb(247, 141, 41);
-
     --image-dark-shadow-color: rgb(6, 5, 1);
-
     /* ======================================
        Transparent Colours
     ====================================== */
-
     --main-transparent-bg: rgba(1, 0, 0, 0.6);
     --datalist-transparent-bg: rgba(4, 2, 0, 0.5);
     --option-transparent-bg: rgba(4, 2, 0, 0.6);
     --color-primary-transparent: rgba(255, 215, 0, 0.8);
-
     /* ======================================
        Custom Gradients
     ====================================== */
-
-    --gradient-primary: linear-gradient(49deg,
-            #050505 0%,
-            #161616 30%,
-            #1b1b1b 65%,
-            #050505 100%);
-
-    --card-image-gradient: linear-gradient(49deg,
-            #241701 0%,
-            #c9933b 40%,
-            #ffd700 100%);
-
-    --card-image-hover-gradient: linear-gradient(49deg,
-            #1d1200 0%,
-            #5f3910 35%,
-            #8e5a18 70%,
-            #c9933b 100%);
+    --gradient-primary: linear-gradient(49deg, #050505 0%, #161616 30%, #1b1b1b 65%, #050505 100%);
+    --card-image-gradient: linear-gradient(49deg, #241701 0%, #c9933b 40%, #ffd700 100%);
+    --card-image-hover-gradient: linear-gradient(49deg, #1d1200 0%, #5f3910 35%, #8e5a18 70%, #c9933b 100%);
 }
 
 * {
     box-sizing: border-box;
 }
 
-
-
 html,
 body {
     width: 100%;
     max-width: 100%;
-
 }
-
 
 body,
 header {
@@ -120,7 +90,6 @@ header h1 {
 .awesome {
     font-family: 'Bad Script', cursive;
     letter-spacing: 2px;
-
 }
 
 .heading,
@@ -137,17 +106,25 @@ h2 {
     color: var(--color-primary);
 }
 
+/*Hide & Display Any Element*/
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
 /*=========================
 SEARCH INPUT ELEMENTS
 ===============================*/
-
 
 .search-container {
     position: relative;
     width: 250px;
     max-width: 500px;
     margin: 0 auto;
-    /* border: solid 2px rgb(255, 52, 52); */
 }
 
 #search-input {
@@ -167,7 +144,7 @@ SEARCH INPUT ELEMENTS
 }
 
 #search-close,
-.modal-close-btn {
+#modal-close-btn {
     width: 25px;
     height: 25px;
     position: absolute;
@@ -177,13 +154,17 @@ SEARCH INPUT ELEMENTS
     border-width: 1px;
     font-size: 1.1rem;
     text-align: center;
-    transition: .5s ease-out;
+    transition: transform .5s ease-out;
     cursor: pointer;
+}
 
+#modal-close-btn {
+    top: 12px;
+    right: 19px;
 }
 
 #search-close,
-.modal-close-btn,
+#modal-close-btn,
 .modal-btn-container .btn {
     background: var(--deep-brown-black-color);
     border-color: var(--color-accent);
@@ -202,12 +183,13 @@ label {
     transition: transform .2s ease-in-out;
 }
 
-#search-close:hover {
+#search-close:hover,
+#modal-close-btn:hover {
     transform: scale(1.1);
 }
 
-
 /*Datalist & Options*/
+
 #data-names {
     position: absolute;
     top: 80px;
@@ -221,8 +203,10 @@ label {
     z-index: 201;
     max-height: 35.500em;
     overflow-y: auto;
+}
 
-
+#data-names.show {
+    display: block;
 }
 
 option {
@@ -233,6 +217,7 @@ option {
     width: 90%;
     margin: 5px auto;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 option:hover {
@@ -240,18 +225,23 @@ option:hover {
     background: var(--color-primary);
 }
 
+.optionFiltered {
+    background: var(--color-accent);
+    color: var(--deep-brown-black-color);
+    border: 1px solid var(--color-primary);
+}
+
 #search-input:hover {
     background: var(--color-primary);
     color: var(--deep-brown-black-color);
     box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
     border-bottom: 3px solid var(--burnt-orange-color);
-
 }
 
-
-
 #search-input:active,
-#search-input:focus {
+#search-input:active,
+#search-input:focus,
+#search-input.lightText {
     width: 100%;
     right: 0;
     background: var(--color-primary);
@@ -259,27 +249,14 @@ option:hover {
     box-shadow: 0 0 7px var(--deep-brown-black-color) inset;
     border-bottom: 3px solid var(--burnt-orange-color);
     caret-color: var(--deep-brown-black-color);
-
-
 }
-
-
 
 #search-input:hover~label,
 #search-input:active~label,
-#search-input:focus~label {
+#search-input:focus~label,
+.input-active {
     transform: translateY(-62px);
-
 }
-
-#search-input:active~#data-names,
-#search-input:focus~#data-names {
-    display: block;
-}
-
-
-
-
 
 /* ======================================
 Main
@@ -292,9 +269,13 @@ Main
     padding: 1rem;
     background: var(--main-transparent-bg);
     border: solid var(--light-gold-color) 1px;
-
+    transition: max-width 0.35s cubic-bezier(0.22, 1, 0.36, 1), margin 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.main.gallery-filtered {
+    max-width: 600px;
+    margin: 10rem auto;
+}
 
 /* =====================================
    Gallery
@@ -305,14 +286,12 @@ Main
     grid-template-columns: 1fr;
     gap: 1rem;
     justify-items: center;
-    /* border: solid rgb(255, 171, 52) 1px; */
 }
 
 .card-container {
     width: 100%;
     max-width: 290px;
     margin: 8px 0;
-    /* border: solid rgb(255, 52, 52) 1px; */
 }
 
 .card {
@@ -328,11 +307,10 @@ Main
     border-radius: 0.25em;
     transition: .4s ease-out;
     overflow: hidden;
-
 }
 
 .card,
-.modal,
+#modal,
 .modal-btn-container {
     background: var(--color-surface);
     border-radius: 0.25em;
@@ -367,7 +345,6 @@ Main
 .modal-name {
     margin: 20px auto 0;
     color: var(--color-primary);
-    /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
 }
 
 .card-text,
@@ -394,7 +371,6 @@ Main
     text-transform: capitalize;
 }
 
-
 /* =====================================
    Overlay & Modal
 ======================================== */
@@ -411,13 +387,11 @@ Main
     background: var(--main-transparent-bg);
 }
 
-
 #overlay-inner-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: solid 1px rgb(255, 52, 52); */
 }
 
 #modal {
@@ -444,7 +418,6 @@ Main
 
 .modal-img {
     width: 150px;
-    margin-top: 35px;
     border-radius: 50%;
 }
 
@@ -456,7 +429,7 @@ Main
     margin: 10px;
 }
 
-.modal hr {
+#modal hr {
     width: 75%;
     margin: 25px auto 30px;
     border-color: var(--color-primary-transparent);
@@ -473,9 +446,8 @@ Main
     padding: 10px 15px 15px;
     margin: 10px auto auto;
     border-radius: 0.25em;
-
+    z-index: 100;
 }
-
 
 .modal-btn-container .btn {
     display: inline-block;
@@ -487,9 +459,8 @@ Main
     transition: .4s ease-out;
 }
 
-
-
 /*SCROLLBAR FOR DATALIST & BROWSER*/
+
 ::-webkit-scrollbar,
 #data-names::-webkit-scrollbar {
     width: 20px;
@@ -509,14 +480,9 @@ Main
     border-radius: 10px;
 }
 
-
-
-
 /* =====================================
    Media Queries
 ======================================== */
-
-
 
 /* =====================================
    Tablet
@@ -538,19 +504,24 @@ Main
 
     .heading,
     .awesome {
-
         text-shadow: 1px 1px 1px var(--heading-shadow-color);
     }
-
 
     .awesome {
         font-size: 1.2rem;
     }
 
-    /*=========================
-SEARCH INPUT ELEMENTS
-===============================*/
+    /*===============================
+     MAIN WHEN GALLERY IS FILTERED
 
+    =================================*/
+    .main.gallery-filtered {
+        margin: 15rem auto;
+    }
+
+    /*==============================
+     SEARCH INPUT ELEMENTS
+    ===============================*/
     .search-container {
         margin-top: 25px;
     }
@@ -561,7 +532,6 @@ SEARCH INPUT ELEMENTS
     .main {
         width: 95%;
     }
-
 
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
@@ -576,7 +546,6 @@ SEARCH INPUT ELEMENTS
     .modal-img-container {
         width: 105px;
         height: 105px;
-
     }
 
     .card-img-container {
@@ -595,7 +564,6 @@ SEARCH INPUT ELEMENTS
 
     .card-name {
         margin: 20px auto 0;
-        /* text-shadow: 0 1px 1px rgb(247, 141, 41); */
     }
 
     .card-text,
@@ -603,13 +571,9 @@ SEARCH INPUT ELEMENTS
         font-size: 0.9em;
     }
 
-
-
-
     /*===============================
 MODALS MEDIA 768PX
 ===================================*/
-
     .modal {
         margin-top: 100px;
     }
@@ -621,9 +585,7 @@ MODALS MEDIA 768PX
     .modal-text {
         font-size: 1.2em;
     }
-
 }
-
 
 /* =====================================
    Desktop
@@ -647,8 +609,6 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
         margin-left: -56px;
     }
 
-
-
     #search-close {
         top: 25px;
         right: 6px;
@@ -659,13 +619,11 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
         font-size: 1.3rem;
         width: 30px;
         height: 30px;
-
     }
 
     /* =====================================
    Gallery MEDIA 1024PX
 ======================================== */
-
     .gallery {
         grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     }
@@ -695,7 +653,6 @@ SEARCH INPUT ELEMENTS MEDIA 1024PX
         box-shadow: 0 1px 3px var(--image-dark-shadow-color);
         transform: translateX(-9px);
     }
-
 
     .btn:hover {
         background: var(--color-accent);

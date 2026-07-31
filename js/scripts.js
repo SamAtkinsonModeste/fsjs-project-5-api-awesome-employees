@@ -2,28 +2,21 @@ let employees = [];
 let activeEmployee;
 const galleryDiv = document.querySelector("#gallery");
 const searchDiv = document.querySelector(".search-container");
-
 const randomUsersUrl =
   "https://randomuser.me/api/?results=12&inc=name,picture,email,location,phone,dob&noinfo&nat=gb";
-
 // INITIALIZATION
 fetchEmployeesData();
-
 async function fetchData(url) {
   const response = await fetch(url);
-
   if (!response.ok) {
     throw new Error(`Error fetching data - Status: ${response.status}`);
   }
-
   const data = await response.json();
   if (data.error) {
     throw new Error(data.error);
   }
-
   return data;
 }
-
 async function fetchEmployeesData() {
   try {
     const data = await fetchData(randomUsersUrl);
@@ -34,9 +27,7 @@ async function fetchEmployeesData() {
     console.error(error);
   }
 }
-
 //!SECTION - HELPER FUNCTIONS
-
 /**
  * Creates and displays an employee card for each employee returned by the API.
  *
@@ -51,7 +42,6 @@ function createEmployeeCards(employees) {
       picture: { large },
       location: { city, state },
     } = employee;
-
     const employeeHTML = `
      <div class="card-container" data-index="${index}">
         <div class="card">
@@ -69,11 +59,9 @@ function createEmployeeCards(employees) {
         </div>
      </div>
       `;
-
     galleryDiv.insertAdjacentHTML("beforeend", employeeHTML);
   });
 }
-
 /**
  * Creates and displays the employee search interface.
  * Generates the search input, clear button, label and datalist,
@@ -86,14 +74,10 @@ function createSearchUI(employees) {
    <input autocomplete="off" type="text" name="search" id="search-input" list="">
                 <button id="search-close" title="Clear Search Field & Reset Employees">X</button>
                 <label for="search-input">Search Employees</label>`;
-
   searchDiv.insertAdjacentHTML("afterbegin", searchInput);
-
   const dataList = `<datalist id="data-names"></datalist>`;
   searchDiv.insertAdjacentHTML("beforeend", dataList);
-
   const dataListElement = document.querySelector("#data-names");
-
   employees.forEach((employee) => {
     const {
       name: { first, last },
@@ -103,17 +87,13 @@ function createSearchUI(employees) {
     option.textContent = `${first} ${last}`;
     dataListElement.appendChild(option);
   });
-
   const searchValue = document.querySelector("#search-input");
   searchValue.addEventListener("focus", optionClickEvents);
   searchValue.addEventListener("input", updateFilterEmployees);
-
   const searchCloseBtn = document.querySelector("#search-close");
   searchCloseBtn.addEventListener("click", resetUI);
 }
-
 //!SECTION - EVENT LISTENER HELPER FUNCTIONS
-
 /**
  * Retrieves the current value from the search input and
  * formats it for case-insensitive searching.
@@ -125,7 +105,6 @@ const getSearchInputValue = () => {
   const formattedSearchValue = input.value.trim().toLowerCase();
   return formattedSearchValue;
 };
-
 /**
  * Filters the displayed employee cards and search options
  * based on the current search input. Also updates the
@@ -138,17 +117,13 @@ const updateFilterEmployees = () => {
   const datalist = document.querySelector("#data-names");
   const currentOptions = datalist.querySelectorAll("option");
   const main = document.querySelector(".main");
-
   let optionCount = 0;
-
   if (inputValue === "") {
     datalist.classList.add("show");
   }
-
   currentOptions.forEach((currentOption, i) => {
     const currentOptionValue = currentOption.value.toLowerCase();
     const employeeCard = document.querySelector(`[data-index="${i}"]`);
-
     if (inputValue === "") {
       currentOption.classList.remove("optionFiltered");
       currentOption.classList.remove("hide");
@@ -158,7 +133,6 @@ const updateFilterEmployees = () => {
       currentOption.classList.add("optionFiltered");
       currentOption.classList.remove("hide");
       employeeCard.style.display = "block";
-
       optionCount++;
     } else {
       currentOption.classList.remove("optionFiltered");
@@ -166,7 +140,6 @@ const updateFilterEmployees = () => {
       employeeCard.style.display = "none";
     }
   });
-
   if (optionCount === 1) {
     main.classList.add("gallery-filtered");
     datalist.classList.remove("show");
@@ -178,7 +151,6 @@ const updateFilterEmployees = () => {
     main.classList.remove("gallery-filtered");
   }
 };
-
 /**
  * Attaches click event listeners to each search option.
  * When an option is selected, updates the search input,
@@ -190,7 +162,6 @@ const optionClickEvents = () => {
   const datalist = document.querySelector("#data-names");
   const datalistOptions = datalist.querySelectorAll("option");
   const inputLabel = document.querySelector('[for="search-input"]');
-
   datalist.classList.add("show");
   datalistOptions.forEach((datalistOption) => {
     datalistOption.addEventListener("click", () => {
@@ -202,7 +173,6 @@ const optionClickEvents = () => {
     });
   });
 };
-
 /**
  * Resets the employee search interface back to its default state.
  * Clears the search input, restores the employee cards and search
@@ -216,7 +186,6 @@ const resetUI = () => {
   const options = datalist.querySelectorAll("option");
   const main = document.querySelector(".main");
   const employeeContainers = document.querySelectorAll(".card-container");
-
   input.value = "";
   input.classList.remove("lightText");
   datalist.classList.remove("show");
@@ -225,16 +194,12 @@ const resetUI = () => {
     option.classList.remove("optionFiltered");
     option.classList.remove("hide");
   });
-
   main.classList.remove("gallery-filtered");
-
   employeeContainers.forEach((employeeContainer) => {
     employeeContainer.style.display = "block";
   });
 };
-
 //!SECTION - OVERLAY & MODAL FUNCTIONS
-
 /**
  * Creates and displays the reusable overlay.
  * Inserts the overlay into the end of the document body
@@ -249,12 +214,10 @@ const createOverlay = () => {
     </div>
   </div>
   `;
-
   document.body.insertAdjacentHTML("beforeend", overlayHTML);
   const overlay = document.querySelector("#overlay");
   return overlay;
 };
-
 /**
  * Creates and displays the employee modal for the selected employee.
  * Retrieves the selected employee's data, formats their birthday,
@@ -266,7 +229,6 @@ const createOverlay = () => {
 const createModal = (index) => {
   const employee = employees[index];
   const innerOverlay = document.querySelector("#overlay-inner-container");
-
   const {
     name: { first, last },
     email,
@@ -280,9 +242,7 @@ const createModal = (index) => {
     },
     dob: { date },
   } = employee;
-
   const birthday = new Date(date).toLocaleDateString("en-GB");
-
   const modalHTML = `
   <div id="modal">
     <button type="button" id="modal-close-btn" class="modal-close-btn">
@@ -314,13 +274,10 @@ const createModal = (index) => {
     </div>
   </div>
   `;
-
   innerOverlay.insertAdjacentHTML("afterbegin", modalHTML);
-
   const modal = document.querySelector("#modal");
   return modal;
 };
-
 /**
  * Creates and displays the modal navigation controls.
  * Inserts the Previous and Next buttons into the overlay
@@ -330,20 +287,16 @@ const createModal = (index) => {
  */
 const createModalNav = () => {
   const innerOverlay = document.querySelector("#overlay-inner-container");
-
   const modalNavHTML = `
   <div class="modal-btn-container">
     <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
     <button type="button" id="modal-next" class="modal-next btn">Next</button>
   </div>
   `;
-
   innerOverlay.insertAdjacentHTML("beforeend", modalNavHTML);
-
   const modalNavContainer = document.querySelector(".modal-btn-container");
   return modalNavContainer;
 };
-
 /**
  * Displays the selected employee's modal interface.
  * Stores the selected employee's index, creates the overlay,
@@ -362,7 +315,6 @@ const displayEmployeeModal = (index) => {
   updateModalBtnsVisibility();
   overlay.addEventListener("click", handleOverlayBtnsClick);
 };
-
 /**
  * Updates the visibility of the modal navigation buttons.
  * Hides the Previous button when the first employee is displayed
@@ -371,12 +323,10 @@ const displayEmployeeModal = (index) => {
 const updateModalBtnsVisibility = () => {
   const prevBtn = document.querySelector("#modal-prev");
   const nextBtn = document.querySelector("#modal-next");
-
   prevBtn.style.visibility = activeEmployee === 0 ? "hidden" : "visible";
   nextBtn.style.visibility =
     activeEmployee === employees.length - 1 ? "hidden" : "visible";
 };
-
 /**
  * Handles all button clicks inside the employee modal overlay.
  * Closes the overlay or navigates between employees by
@@ -386,11 +336,8 @@ const updateModalBtnsVisibility = () => {
  */
 const handleOverlayBtnsClick = (evt) => {
   const clickedBtn = evt.target.closest("button");
-
   if (!clickedBtn) return;
-
   const overlay = document.querySelector("#overlay");
-
   if (clickedBtn.id === "modal-close-btn") {
     overlay.remove();
   } else if (clickedBtn.id === "modal-prev" && activeEmployee > 0) {
@@ -408,9 +355,7 @@ const handleOverlayBtnsClick = (evt) => {
     updateModalBtnsVisibility();
   }
 };
-
 //!SECTION - GALLERY DIV EVENT LISTENER
-
 /**
  * Opens the employee modal when an employee card is clicked.
  * Uses event delegation to identify the selected employee and
@@ -418,9 +363,7 @@ const handleOverlayBtnsClick = (evt) => {
  */
 galleryDiv.addEventListener("click", (evt) => {
   const employeeCard = evt.target.closest(".card-container");
-
   if (!employeeCard) return;
-
   const employeeIndex = employeeCard.getAttribute("data-index");
   displayEmployeeModal(employeeIndex);
 });
