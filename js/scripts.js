@@ -113,8 +113,8 @@ function createSearchUI(employees) {
   });
 
   const searchValue = document.querySelector("#search-input");
+  searchValue.addEventListener("focus", optionClickEvents);
   searchValue.addEventListener("input", updateFilterEmployees);
-  // undateFilterEmployees();
 }
 
 /**
@@ -131,17 +131,22 @@ const getSearchInputValue = () => {
 
 /**
  * Filters the displayed employee cards and search options
- * based on the current search input. Also updates the search
- * interface when no matches or a single match remain.
+ * based on the current search input. Also updates the
+ * search interface by showing or hiding the datalist and
+ * adjusting the gallery layout when a single matching
+ * employee remains.
  */
 const updateFilterEmployees = () => {
   const inputValue = getSearchInputValue();
   const datalist = document.querySelector("#data-names");
   const currentOptions = datalist.querySelectorAll("option");
-  const cards = document.querySelectorAll(".card-container");
+  const main = document.querySelector(".main");
+
   let optionCount = 0;
-  console.log(datalist);
-  console.log(currentOptions);
+
+  if (inputValue === "") {
+    datalist.classList.add("show");
+  }
 
   currentOptions.forEach((currentOption, i) => {
     const currentOptionValue = currentOption.value.toLowerCase();
@@ -151,11 +156,12 @@ const updateFilterEmployees = () => {
       currentOption.classList.remove("optionFiltered");
       currentOption.classList.remove("hide");
       employeeCard.style.display = "block";
-      datalist.classList.remove("hide");
+      main.classList.remove("gallery-filtered");
     } else if (currentOptionValue.includes(inputValue) && inputValue !== "") {
       currentOption.classList.add("optionFiltered");
       currentOption.classList.remove("hide");
       employeeCard.style.display = "initial";
+
       optionCount++;
     } else {
       console.log(inputValue);
@@ -166,17 +172,47 @@ const updateFilterEmployees = () => {
   });
 
   if (optionCount === 1) {
-    datalist.classList.add("hide");
+    main.classList.add("gallery-filtered");
+    datalist.classList.remove("show");
     currentOptions.forEach((currentOption) => {
       currentOption.classList.remove("optionFiltered");
       currentOption.classList.remove("hide");
     });
+
+    console.log(datalist);
+  } else {
+    main.classList.remove("gallery-filtered");
   }
 
   console.log(optionCount);
 };
 
-const optionClickEvents = () => {};
+/**
+ * Attaches click event listeners to each search option.
+ * When an option is selected, updates the search input,
+ * applies the active input styling, hides the datalist,
+ * and filters the employee cards.
+ */
+const optionClickEvents = () => {
+  const input = document.querySelector("#search-input");
+  const datalist = document.querySelector("#data-names");
+  const datalistOptions = datalist.querySelectorAll("option");
+  const inputLabel = document.querySelector('[for="search-input"]');
+
+  datalist.classList.add("show");
+  console.log(datalist);
+  datalistOptions.forEach((datalistOption) => {
+    datalistOption.addEventListener("click", () => {
+      console.log("Option click handler fired");
+      input.value = datalistOption.value;
+      input.classList.add("lightText");
+      console.log(input.value);
+      inputLabel.classList.add("input-active");
+      datalist.classList.remove("show");
+      updateFilterEmployees();
+    });
+  });
+};
 
 /**
  * Creates and displays the reusable overlay.
